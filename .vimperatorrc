@@ -1,0 +1,117 @@
+﻿"------------------------------------------------------------------------------"
+"	全般
+"------------------------------------------------------------------------------"
+set runtimepath=~/.vimperator
+
+" ウィンドウのタイトルを変える
+set titlestring="Mozilla Firefox"
+
+" ページ全体で検索語を強調表示
+set hlsearch
+
+" :[tab]open の補完対象と順番
+set complete=sbl
+
+" colorschemeを読み込み
+colorscheme common
+js<<EOM
+if (liberator.has("Win32")) {
+	liberator.execute("colorscheme windows7");
+	if (options.getPref('extensions.treestyletab.tabbar.style')=='') {
+		liberator.execute("colorscheme windows7-treestyletab");
+	}
+}
+EOM
+
+" userContent.vimpを読み込み
+source ~/.vimperator/userContent.vimp
+
+" TITLEとかの展開
+" refs http://vimperator.g.hatena.ne.jp/teramako/20110723/1311425979
+abbrev -javascript TITLE buffer.title
+abbrev -javascript URL buffer.URI
+
+
+"------------------------------------------------------------------------------"
+"	キーマップ
+"------------------------------------------------------------------------------"
+nnoremap j <Down>
+nnoremap k <Up>
+
+nnoremap <S-j> <C-d>
+nnoremap <S-k> <C-u>
+
+nnoremap <A-PageUp> <C-u>
+nnoremap <A-PageDown> <C-d>
+
+nnoremap e i
+
+
+"------------------------------------------------------------------------------"
+"	プラグイン別の設定
+"------------------------------------------------------------------------------"
+let g:plugin_loader_roots="~/.vimperator/vimperator-plugins"
+let g:plugin_loader_plugins="_libly,account_switcher,caret-hint,copy,direct_bookmark,feedSomeKeys_3,forcefocuscontent,ime_controller,multi_requester,walk-input"
+
+"""" direct_bookmark.js """"
+let g:direct_sbm_use_services_by_tag = "gp"
+let g:direct_sbm_use_services_by_post = "g"
+
+"""" ldrize_cooperation.js """
+"let g:ldrc_enable = "false"
+let g:ldrc_captureMappings = "['j','k','i','o','/']"
+
+"autocmd LocationChange .* set noldrc
+"autocmd LocationChange www.google.co.jp/search set ldrc
+"autocmd LocationChange www.nicovideo.jp/search/ set ldrc
+
+""" feedSomeKeys_3.js """
+command! -nargs=+ lazy autocmd VimperatorEnter .* <args>
+" Gmail
+lazy fmaps -u='mail\.google\.com/mail' j k o s c,e i,x n,*n <Del>,# u r gi gs gd ga gc / e+,+ e-,-
+lazy fmaps -u='mail\.google\.com/mail/.*/[0-9a-f]+$' j,5<Down> k,5<Up>
+" Google Reader
+lazy fmaps -u='www\.google\.(co\.jp|com)/reader' -events=vkeypress j k r f a v m s gh ga gs gS gu q,gt gd gp /
+" Google Reader Full Feed
+lazy fmaps -u='www\.google\.(co\.jp|com)/reader' -events=vkeyup z
+" Google Calendar
+lazy fmaps -u='www\.google\.com/calendar/' -events=vkeydown j k r gd,d gw,w gm,m /
+" Remember The Milk
+lazy fmaps -u='https?://www\.rememberthemilk\.com/home/' j k i n c p <F2>,r <Del> ed,d ef,f eg,g es,s eu,u el,l ey,y e1,1 e2,2 e3,3 a,t l,<C-S-Right> h,<C-S-Left>
+
+""" copy.js """
+" refs http://qiita.com/items/83e2fef39bac531577e2
+javascript <<EOM
+(function () {
+	liberator.globalVariables.copy_templates = [
+		{ label: 'titleAndURL',    value: '%TITLE%\n%URL%' },
+		{ label: 'title',          value: '%TITLE%', map: ',y' },
+		{ label: 'anchor',         value: '<a href="%URL%">%TITLE%</a>' },
+		{ label: 'selanchor',      value: '<a href="%URL%" title="%TITLE%">%SEL%</a>' },
+		{ label: 'htmlblockquote', value: '<blockquote cite="%URL%" title="%TITLE%">%HTMLSEL%</blockquote>' },
+
+		// ↑ここまでデフォルであるやついろいろ。ここからamazon↓
+		{ label: 'amazon',   value: 'copy clean amazon url from current page',
+			custom: function() {
+				var m = content.document.location.pathname.match(/dp\/(\d+)/);
+				return m ? ('http://www.amazon.co.jp/dp/' + m[1]) : null;
+			}
+		},
+	];
+})();
+EOM
+
+" toggle pin
+" via http://qiita.com/t3kot3ko/items/1b032940dbb79e88323e
+javascript <<EOM
+liberator.modules.commands.addUserCommand(["togglepin"], "add pin to current tab",
+function(){
+    var currentTab = gBrowser.mCurrentTab
+    if(currentTab.pinned){
+        gBrowser.unpinTab(currentTab)
+    }
+    else{
+        gBrowser.pinTab(currentTab)
+    }
+});
+EOM

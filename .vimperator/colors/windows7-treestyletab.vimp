@@ -1,0 +1,149 @@
+﻿style -name=windows7-treestyletab chrome://* <<EOM
+/* タブの基本設定 */
+.tabbrowser-tabs[treestyletab-mode="vertical"] .tabbrowser-tab {
+	-moz-box-pack: start;
+	-moz-box-flex: 0;
+	-moz-appearance: none !important;
+	background: transparent !important;
+	border: 2px solid transparent !important;
+	border-radius: 2.67px !important;
+	padding-top: 1px !important;
+	padding-bottom: 1px !important;
+}
+
+.tabbrowser-tabs[treestyletab-mode="vertical"] .tab-stack {
+	min-height: 0 !important;
+}
+
+.tabbrowser-tabs[treestyletab-mode="vertical"] .tab-throbber,
+.tabbrowser-tabs[treestyletab-mode="vertical"] .tab-icon-image,
+.tabbrowser-tabs[treestyletab-mode="vertical"] .tab-close-button {
+	margin-top: 0 !important;
+}
+
+/*
+.tabbrowser-tabs[treestyletab-mode="vertical"] .tabbrowser-tab[pinned="true"] {
+	height: 28px !important;
+	max-height: 28px !important;
+	width: 28px !important;
+	max-width: 28px !important;
+}
+*/
+
+/* マウスオーバー中のタブ */
+.tabbrowser-tabs[treestyletab-mode="vertical"] .tabbrowser-tab:hover {
+	-moz-border-top-colors:    #b8d6fb #fcfdfe !important;
+	-moz-border-bottom-colors: #b8d6fb #f2f7fe !important;
+	-moz-border-left-colors:   #b8d6fb #f9fcfe !important;
+	-moz-border-right-colors:  #b8d6fb #f9fcfe !important;
+	background: -moz-linear-gradient(top, #fafbfd, #ebf3fd) repeat-x !important;
+}
+
+/* 表示中のタブ */
+.tabbrowser-tabs[treestyletab-mode="vertical"] .tabbrowser-tab[selected="true"] {
+	-moz-border-top-colors:    #84acdd #f1f7fe !important;
+	-moz-border-bottom-colors: #84acdd #deedfe !important;
+	-moz-border-left-colors:   #84acdd #e8f2fe !important;
+	-moz-border-right-colors:  #84acdd #e8f2fe !important;
+	background: -moz-linear-gradient(top, #ebf4fe, #cfe4fe) repeat-x !important;
+}
+
+/* 非アクティブウィンドウの場合 */
+.tabbrowser-tabs[treestyletab-mode="vertical"] .tabbrowser-tab[selected="true"]:-moz-window-inactive {
+	-moz-border-top-colors:    #d9d9d9 #fafafb !important;
+	-moz-border-bottom-colors: #d9d9d9 #f0f0f0 !important;
+	-moz-border-left-colors:   #d9d9d9 #f8f8f8 !important;
+	-moz-border-right-colors:  #d9d9d9 #f8f8f8 !important;
+	background: -moz-linear-gradient(top, #f8f8f8, #e5e5e5) repeat-x !important;
+}
+
+/* 表示中かつマウスオーバー中のタブ */
+.tabbrowser-tabs[treestyletab-mode="vertical"] .tabbrowser-tab[selected="true"]:hover {
+	-moz-border-top-colors:    #7da2ce #ebf4fd !important;
+	-moz-border-bottom-colors: #7da2ce #dbeafd !important;
+	-moz-border-left-colors:   #7da2ce #dfedfd !important; /* 本当は内側の線には縦方向にグラデーションがかかっているみたい */
+	-moz-border-right-colors:  #7da2ce #dfedfd !important;
+	background: -moz-linear-gradient(top, #dcebfc, #c1dbfc) repeat-x !important;
+}
+
+/* ピン留め */
+.tabbrowser-tabs[treestyletab-mode="vertical"] .tabbrowser-tab[pinned="true"] {
+	padding: 0 !important;
+}
+
+/* ドラックアンドドロップの処理 */
+/* 本当はExplorerではドラックし始めたときに色が変わっている */
+.tabbrowser-tabs[treestyletab-mode="vertical"] .tabbrowser-tab[treestyletab-drop-position="self"] {
+	outline: none !important; /* Tree Style Tab が設定するcssを上書き */
+	-moz-border-top-colors:    #84acdd #f1f7fe !important;
+	-moz-border-bottom-colors: #84acdd #deedfe !important;
+	-moz-border-left-colors:   #84acdd #e8f2fe !important;
+	-moz-border-right-colors:  #84acdd #e8f2fe !important;
+	background: -moz-linear-gradient(top, #ebf4fe, #cfe4fe) repeat-x !important;
+}
+
+/* Multiple Tab Handler */
+.tabbrowser-tabs[treestyletab-mode="vertical"] .tabbrowser-tab[multiselected="true"],
+.tabbrowser-tabs[treestyletab-mode="vertical"] .tabbrowser-tab[multiselected="true"]:hover {
+	-moz-border-top-colors:    #5895d7 #94c0ed !important;
+	-moz-border-bottom-colors: #5895d7 #94c0ed !important;
+	-moz-border-left-colors:   #5895d7 #94c0ed !important;
+	-moz-border-right-colors:  #5895d7 #94c0ed !important;
+	background: -moz-linear-gradient(top, #93bfec, #81b4ec) repeat-x !important;
+}
+
+.tabbrowser-tabs[treestyletab-mode="vertical"] .tabbrowser-tab[multiselected="true"] .tab-text,
+.tabbrowser-tabs[treestyletab-mode="vertical"] .tabbrowser-tab[multiselected="true"] > .tab-image-left,
+.tabbrowser-tabs[treestyletab-mode="vertical"] .tabbrowser-tab[multiselected="true"] > .tab-image-middle,
+.tabbrowser-tabs[treestyletab-mode="vertical"] .tabbrowser-tab[multiselected="true"] > .tab-image-middle + .tab-close-button,
+.tabbrowser-tabs[treestyletab-mode="vertical"] .tabbrowser-tab[multiselected="true"] > .tab-image-right,
+.tabbrowser-tabs[treestyletab-mode="vertical"] .tabbrowser-tab[multiselected="true"] .tab-content {
+	background-color: transparent !important;
+	color: black !important;
+}
+
+/* tabbar */
+.tabbrowser-tabs[treestyletab-mode="vertical"] {
+	padding-left: 1px;
+	padding-right: 2px;
+	background-color: #fcfcfc !important; /* other Win7 apps seems to use this */
+	border-top: 1px solid ThreeDLightShadow !important;
+}
+
+.treestyletab-tabbar-toolbar {
+	border-left: none !important;
+	padding: 0 !important;
+}
+
+/* splitterのコード #sidebar-splitter のコードをそのまま持ってきた !importantはいじった */
+.treestyletab-splitter {
+	border: 0 !important;
+	-moz-border-end: 1px solid #d6e5f5 !important;
+	/*-moz-border-end: 1px solid ThreeDShadow !important;*/
+	min-width: 0 !important;
+	width: 3px;
+	background-color: transparent !important;
+	-moz-margin-start: -3px;
+	position: relative !important;
+}
+.treestyletab-splitter grippy {
+	display: none;
+}
+
+.tabbrowser-tabs[treestyletab-mode="vertical"] .tab-background {
+	display: none !important;
+}
+
+/* 新しいタブを開くボタン */
+.tabbrowser-tabs[treestyletab-mode="vertical"] .tabs-newtab-button {
+	border: 0 !important;
+	margin-top: 5px !important;
+	background: transparent !important;
+}
+
+/* Hide close button automatically */
+.tabbrowser-tabs[treestyletab-mode="vertical"] .tabbrowser-tab:not(:hover) .tab-close-button {
+	display: none !important;
+}
+
+EOM

@@ -1,0 +1,33 @@
+﻿style -name windows7 chrome://* <<EOM
+/* ボーダーの色はアドオンバーと同じ */
+#liberator-bottombar {
+	margin-top: -1px;
+	border-top: 1px solid ThreeDShadow;
+}
+
+/* ウィンドウを最大化していないときのバーの色を変更 */
+#main-window[sizemode=normal] #liberator-bottombar {
+	border-left: 1px solid rgba(10%,10%,10%,.4);
+	border-right: 1px solid rgba(10%,10%,10%,.4);
+//	border-bottom: 1px solid rgba(10%,10%,10%,.4);
+}
+
+/* コマンドの補完の横の線 */
+#main-window[sizemode=normal] .liberator-container.liberator-floatbox {
+	border-left: 1px solid transparent;
+	border-right: 1px solid transparent;
+}
+EOM
+
+" 背景の色をブックマークツールバーみたいにする
+hi ModeMsg -append background-color: hsl(214,44%,87%); background-image: -moz-linear-gradient(rgba(255,255,255,.5), rgba(255,255,255,0));
+hi InfoMsg -append background-color: hsl(214,44%,87%); background-image: -moz-linear-gradient(rgba(255,255,255,.5), rgba(255,255,255,0));
+hi WarningMsg -append background-color: hsl(214,44%,87%); background-image: -moz-linear-gradient(rgba(255,255,255,.5), rgba(255,255,255,0));
+hi Normal -append background-color: hsl(214,44%,87%); background-image: -moz-linear-gradient(rgba(255,255,255,.5), rgba(255,255,255,0));
+
+hi CmdLine -append border-bottom-left-radius: 4px;
+
+" 文字を赤色にする
+hi ModeMsg -append color: red;
+
+hi CompItem -append background-color: white;

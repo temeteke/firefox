@@ -1,0 +1,19 @@
+" 共通の設定
+
+" リンクの設定
+hi Hint -append background: rgba(100%, 0%, 0%, .7); font-size: 12px;
+hi HintElem background-color: lightyellow; color: black;
+hi HintActive background-color: pink; color: black;
+
+" サイドバーを右に
+style chrome://* <<EOM
+#browser {
+	-moz-box-direction: reverse;
+}
+EOM
+
+style! -name=treestyletab-fix chrome://* <<EOM
+.tabbrowser-tab {
+	z-index: 0 !important;
+}
+EOM

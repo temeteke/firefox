@@ -1,0 +1,15 @@
+" Gmail
+style -name gmail mail.google.com <<EOM
+.ii, .LW-avf {
+	font-family: monospace !important;
+}
+EOM
+
+
+" Evernote
+style -name evernote www.evernote.com <<EOM
+/* 広告領域を消す */
+#gwt-debug-sidebar > div + div {
+	bottom: 0 !important;
+}
+EOM
