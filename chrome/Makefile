@@ -1,4 +1,8 @@
-ifeq ($(shell uname -o), Cygwin)
+DIR := /dev/null
+ifeq ($(shell uname), Darwin)
+	PROFILE := $(wildcard ~/Library/Application_Support/Firefox/Profiles/*.default)
+	DIR := $(PROFILE)/chrome
+else ifeq ($(shell uname -o), Cygwin)
 	APPDATA := $(shell cygpath ${APPDATA})
 	PROFILE := $(wildcard $(APPDATA)/Mozilla/Firefox/Profiles/*.default)
 	DIR := $(PROFILE)/chrome
