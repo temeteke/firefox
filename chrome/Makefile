@@ -1,5 +1,9 @@
-DIR := $(shell which cygpath > /dev/null 2>&1 && cygpath "${APPDATA}\\Mozilla\\Firefox\\profiles\\*.default\\chrome")
-DIR := $(shell echo $(DIR))
+ifeq ($(shell uname -o), Cygwin)
+	APPDATA := $(shell cygpath ${APPDATA})
+	PROFILE := $(wildcard $(APPDATA)/Mozilla/Firefox/Profiles/*.default)
+	DIR := $(PROFILE)/chrome
+endif
+
 FILES := _addmenu.js
 TARGETS := userChrome.js addMenu.uc.js WordHighlightToolbar.uc.js
 TEMPS := alice0775 Griever
@@ -35,8 +39,11 @@ Griever: FORCE
 clean:
 	rm -rf $(TARGETS) $(TEMPS)
 
-install: $(FILES) $(TARGETS)
-	cp $^ $(DIR)/
+$(DIR):
+	mkdir $@
+
+install: $(TARGETS) $(DIR)
+	cp $(FILES) $(TARGETS) $(DIR)/
 		
 uninstall:
 	rm -rf $(addprefix $(DIR)/, $(FILES) $(TARGETS))
