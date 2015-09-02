@@ -1,0 +1,14 @@
+--- addMenu.uc.js	2015-09-02 13:49:53.015831300 +0900
++++ addMenu.uc.js.treestyletab	2015-09-02 13:49:32.554660900 +0900
+@@ -280,8 +280,10 @@
+ 		}
+ 		if (uri.scheme === "javascript")
+ 			loadURI(url);
+-		else if (where)
++		else if (where) {
++			if ('TreeStyleTabService' in window) TreeStyleTabService.readyToOpenChildTab(gBrowser.selectedTab);
+ 			openUILinkIn(uri.spec, where);
++		}
+ 		else if (event.button == 1)
+ 			openNewTabWith(uri.spec);
+ 		else openUILink(uri.spec, event);

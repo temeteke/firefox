@@ -25,6 +25,7 @@ userChrome.js: alice0775/userChrome.js
 
 addMenu.uc.js: Griever/addMenu/addMenu.uc.js
 	cp $^ $@
+	patch -u < addMenu.uc.js.patch
 
 WordHighlightToolbar.uc.js: Griever/WordHighlightToolbar/WordHighlightToolbar.uc.js
 	cp $^ $@
