@@ -1,13 +1,43 @@
---- addMenu.uc.js	2015-09-02 13:49:53.015831300 +0900
-+++ addMenu.uc.js.treestyletab	2015-09-02 13:49:32.554660900 +0900
+--- addMenu.uc.js	2015-09-04 13:14:43.088441800 +0900
++++ addMenu.uc.js.mod	2015-09-04 13:20:00.200579600 +0900
+@@ -254,24 +254,24 @@
+ 			let engine = Services.search.getEngineByAlias(keyword);
+ 			if (engine) {
+ 				let submission = engine.getSubmission(param);
+-				this.openCommand(event, submission.uri.spec, where);
++				this.openCommand(event, submission.uri.spec, submission.postData, where);
+ 			} else {
+ 				PlacesUtils.keywords.fetch(keyword||'').then(entry => {
+ 					if (!entry) return;
+ 					// 文字化けの心配が…
+ 					let newurl = entry.url.href.replace('%s', encodeURIComponent(param));
+-					this.openCommand(event, newurl, where);
++					this.openCommand(event, newurl, null, where);
+ 				});
+ 			}
+ 		}
+ 		else if (url)
+-			this.openCommand(event, this.convertText(url), where);
++			this.openCommand(event, this.convertText(url), null, where);
+ 		else if (exec)
+ 			this.exec(exec, this.convertText(text));
+ 		else if (text) 
+ 			this.copy(this.convertText(text));
+ 	},
+-	openCommand: function(event, url, where) {
++	openCommand: function(event, url, postData, where) {
+ 		var uri;
+ 		try {
+ 			uri = Services.io.newURI(url, null, null);
 @@ -280,8 +280,10 @@
  		}
  		if (uri.scheme === "javascript")
  			loadURI(url);
 -		else if (where)
+-			openUILinkIn(uri.spec, where);
 +		else if (where) {
 +			if ('TreeStyleTabService' in window) TreeStyleTabService.readyToOpenChildTab(gBrowser.selectedTab);
- 			openUILinkIn(uri.spec, where);
++			openUILinkIn(uri.spec, where, {postData: postData});
 +		}
  		else if (event.button == 1)
  			openNewTabWith(uri.spec);
