@@ -6,8 +6,11 @@ else ifeq ($(shell uname), Linux)
 	PROFILE := $(wildcard ~/.mozilla/firefox/*.default)
 	DIR := $(PROFILE)/chrome
 else ifeq ($(shell uname -o), Cygwin)
-	APPDATA := $(shell cygpath ${APPDATA})
-	PROFILE := $(wildcard $(APPDATA)/Mozilla/Firefox/Profiles/*.default)
+	APPDATA := $(shell cygpath "$(APPDATA)")
+	PROFILE := $(firstword \
+		$(wildcard $(APPDATA)/Mozilla/Firefox/Profiles/*.default) \
+		$(shell cygpath "\\app\\FirefoxPortable\\Data\\profile") \
+	)
 	DIR := $(PROFILE)/chrome
 endif
 
