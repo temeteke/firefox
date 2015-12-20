@@ -40,12 +40,12 @@ Griever/WordHighlightToolbar/WordHighlightToolbar.uc.js: Griever
 alice0775: FORCE
 	[ -d $@ ] \
 		&& (cd $@ && git pull) \
-		|| git clone https://github.com/alice0775/userChrome.js.git $@
+		|| git clone --depth 1 https://github.com/alice0775/userChrome.js.git $@
 
 Griever: FORCE
 	[ -d $@ ] \
 		&& (cd $@ && git pull) \
-		|| git clone https://github.com/Griever/userChromeJS.git $@
+		|| git clone --depth 1 https://github.com/Griever/userChromeJS.git $@
 
 clean:
 	rm -rf $(TARGETS) $(TEMPS)

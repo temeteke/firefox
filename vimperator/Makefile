@@ -26,7 +26,7 @@ vimperator-plugins/%: vimperator-plugins
 vimperator-plugins: FORCE
 	[ -d $@ ] \
 		&& (cd $@ && git pull) \
-		|| git clone https://github.com/vimpr/vimperator-plugins.git $@
+		|| git clone --depth 1 https://github.com/vimpr/vimperator-plugins.git $@
 
 .vimperator/colors/solarized_light.vimp:
 	curl https://raw.githubusercontent.com/yasumemo/dotfiles/master/vimperator/colors/solarized_light.vimp > $@
@@ -39,7 +39,7 @@ vimperator-colors/%: vimperator-colors
 vimperator-colors: FORCE
 	[ -d $@ ] \
 		&& (cd $@ && git pull) \
-		|| git clone https://github.com/vimpr/vimperator-colors.git $@
+		|| git clone --depth 1 https://github.com/vimpr/vimperator-colors.git $@
 
 clean:
 	rm -rf $(TEMP)
