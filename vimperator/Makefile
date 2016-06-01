@@ -5,7 +5,7 @@ DIRS := $(foreach dir,$(DIRS),$(shell [ -d $(dir) ] && echo $(dir)))
 DIR := $(word 1, $(DIRS))
 $(if $(DIR), ,$(error The installation directory is not found))
 
-PLUGINS := _libly.js account_switcher.js caret-hint.js copy.js direct_bookmark.js feedSomeKeys_3.js forcefocuscontent.js multi_requester.js walk-input.js
+PLUGINS := _libly.js caret-hint.js copy.js direct_bookmark.js feedSomeKeys_3.js forcefocuscontent.js multi_requester.js walk-input.js
 COLORS := solarized_light.vimp
 
 TEMP := vimperator-plugins $(addprefix .vimperator/plugin/, $(PLUGINS)) $(addprefix .vimperator/colors/, $(COLORS))
