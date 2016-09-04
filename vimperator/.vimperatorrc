@@ -31,6 +31,8 @@ source ~/.vimperator/userContent.vimp
 abbrev -javascript TITLE buffer.title
 abbrev -javascript URL buffer.URI
 
+" ポップアップを許可
+set popups=resized
 
 "------------------------------------------------------------------------------"
 "	キーマップ
